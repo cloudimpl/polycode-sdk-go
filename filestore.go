@@ -1,6 +1,10 @@
 package sdk
 
 type File interface {
+	Parent() Folder
+	Name() string
+	Path() string
+
 	Get() (bool, []byte, error)
 	Download(filePath string) error
 	GetDownloadLink() (string, error)
@@ -16,6 +20,10 @@ type File interface {
 }
 
 type Folder interface {
+	Parent() Folder
+	Name() string
+	Path() string
+
 	Folder(name string) Folder
 	CreateNewFolder(name string) (Folder, error)
 	File(name string) File
