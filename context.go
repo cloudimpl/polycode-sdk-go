@@ -21,10 +21,10 @@ type ServiceContext interface {
 
 type WorkflowContext interface {
 	BaseContext
-	Service(service string) *ServiceBuilder
-	Agent(agent string) *AgentBuilder
-	ServiceEx(envId string, service string) *ServiceBuilder
-	AgentEx(envId string, agent string) *AgentBuilder
+	Service(service string) ServiceBuilder
+	Agent(agent string) AgentBuilder
+	ServiceEx(envId string, service string) ServiceBuilder
+	AgentEx(envId string, agent string) AgentBuilder
 	App(appName string) Service
 	AppEx(envId string, appName string) Service
 	Controller(controller string) Controller
