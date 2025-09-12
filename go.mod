@@ -1,4 +1,4 @@
-module github.com/cloudimpl/byte-os-sdk
+module github.com/cloudimpl/byte-sdk-go
 
 go 1.24.5
 
