@@ -1,6 +1,6 @@
 package runtime
 
-import "github.com/cloudimpl/byte-os/sdk"
+import "github.com/cloudimpl/byte-os-sdk"
 
 type Service interface {
 	GetName() string
