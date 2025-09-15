@@ -1,4 +1,4 @@
-package sdk
+package polycode
 
 type Response interface {
 	IsError() bool

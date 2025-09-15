@@ -1,4 +1,4 @@
-package sdk
+package polycode
 
 type Agent interface {
 	Call(options TaskOptions, input AgentInput) Response

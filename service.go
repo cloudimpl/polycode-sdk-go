@@ -1,4 +1,4 @@
-package sdk
+package polycode
 
 type Service interface {
 	RequestReply(options TaskOptions, method string, input any) Response

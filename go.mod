@@ -1,4 +1,4 @@
-module github.com/cloudimpl/byte-sdk-go
+module github.com/cloudimpl/polycode-sdk-go
 
 go 1.24.5
 

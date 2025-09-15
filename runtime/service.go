@@ -1,6 +1,6 @@
 package runtime
 
-import "github.com/cloudimpl/byte-sdk-go"
+import "github.com/cloudimpl/polycode-sdk-go"
 
 type Service interface {
 	GetName() string
@@ -8,6 +8,6 @@ type Service interface {
 	GetInputType(method string) (any, error)
 	GetOutputType(method string) (any, error)
 	IsWorkflow(method string) bool
-	ExecuteService(ctx sdk.ServiceContext, method string, input any) (any, error)
-	ExecuteWorkflow(ctx sdk.WorkflowContext, method string, input any) (any, error)
+	ExecuteService(ctx polycode.ServiceContext, method string, input any) (any, error)
+	ExecuteWorkflow(ctx polycode.WorkflowContext, method string, input any) (any, error)
 }

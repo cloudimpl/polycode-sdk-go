@@ -1,6 +1,6 @@
-package sdk
+package polycode
 
-import "github.com/cloudimpl/byte-sdk-go/errors"
+import "github.com/cloudimpl/polycode-sdk-go/errors"
 
 type Signal interface {
 	Await() Response

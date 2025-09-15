@@ -1,4 +1,4 @@
-package sdk
+package polycode
 
 type LogEntry interface {
 	Str(key string, val string) LogEntry
