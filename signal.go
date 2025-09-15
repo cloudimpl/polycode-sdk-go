@@ -1,6 +1,6 @@
 package sdk
 
-import "github.com/cloudimpl/byte-os/sdk/errors"
+import "github.com/cloudimpl/byte-sdk-go/errors"
 
 type Signal interface {
 	Await() Response
