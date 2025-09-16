@@ -11,3 +11,15 @@ type Runtime interface {
 	RegisterApi(httpHandler *gin.Engine) error
 	Start() error
 }
+
+func RegisterService(service Service) error {
+	return CurrentRuntime.RegisterService(service)
+}
+
+func RegisterApi(httpHandler *gin.Engine) error {
+	return CurrentRuntime.RegisterApi(httpHandler)
+}
+
+func Start() error {
+	return CurrentRuntime.Start()
+}
