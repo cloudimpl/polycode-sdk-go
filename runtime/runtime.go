@@ -11,6 +11,7 @@ type Runtime interface {
 	RegisterService(service Service) error
 	RegisterApi(httpHandler *gin.Engine) error
 	RegisterValidator(validator polycode.Validator) error
+	GetValidator() polycode.Validator
 	Start() error
 }
 
@@ -24,6 +25,10 @@ func RegisterApi(httpHandler *gin.Engine) error {
 
 func RegisterValidator(validator polycode.Validator) error {
 	return CurrentRuntime.RegisterValidator(validator)
+}
+
+func GetValidator() polycode.Validator {
+	return CurrentRuntime.GetValidator()
 }
 
 func Start() error {
