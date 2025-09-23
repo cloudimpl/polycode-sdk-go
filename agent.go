@@ -5,6 +5,6 @@ type Agent interface {
 }
 
 type AgentBuilder interface {
-	WithTenantId(tenantId string) AgentBuilder
+	WithEnvId(envId string) AgentBuilder
 	Get() Agent
 }

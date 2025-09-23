@@ -29,18 +29,18 @@ type BaseContext interface {
 	Meta() HandlerContextMeta
 	AuthContext() AuthContext
 	Logger() Logger
-	UnsafeDb() DataStoreBuilder
 	FileStore() Folder
 	TempFileStore() Folder
 }
 
 type ServiceContext interface {
 	BaseContext
-	Db() DataStore
+	Db() DataStoreBuilder
 }
 
 type WorkflowContext interface {
 	BaseContext
+	ReadOnlyDb() ReadOnlyDataStoreBuilder
 	Service(service string) ServiceBuilder
 	Agent(agent string) AgentBuilder
 	ServiceEx(envId string, service string) ServiceBuilder

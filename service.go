@@ -6,7 +6,6 @@ type Service interface {
 }
 
 type ServiceBuilder interface {
-	WithTenantId(tenantId string) ServiceBuilder
-	WithPartitionKey(partitionKey string) ServiceBuilder
+	WithEnvId(envId string) ServiceBuilder
 	Get() Service
 }

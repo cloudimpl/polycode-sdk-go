@@ -17,10 +17,16 @@ type TaskOptions struct {
 	Retries         int             `json:"retries"`
 	RetryOnFail     bool            `json:"retryOnFail"`
 	BackoffStrategy BackoffStrategy `json:"backoffStrategy"`
+	SequenceKey     string          `json:"sequenceKey"`
 }
 
 func (t TaskOptions) WithTimeout(timeout time.Duration) TaskOptions {
 	t.Timeout = timeout
+	return t
+}
+
+func (t TaskOptions) WithSequenceKey(key string) TaskOptions {
+	t.SequenceKey = key
 	return t
 }
 
