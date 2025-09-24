@@ -1,21 +1,38 @@
 package polycode
 
-import "time"
+import (
+	"context"
+	"time"
+)
+
+type ReadOnlyDoc interface {
+	Unmarshal(item interface{}) error
+	ExpireIn(expireIn time.Duration) error
+	Update(item interface{}) error
+	Delete() error
+	Collection(name string) ReadOnlyCollection
+}
+
+type Doc interface {
+	Unmarshal(item interface{}) error
+	ExpireIn(expireIn time.Duration) error
+	Update(item interface{}) error
+	Delete() error
+	Collection(name string) Collection
+}
 
 type ReadOnlyCollection interface {
-	GetOne(key string, ret interface{}) (bool, error)
-	Query() Query
+	GetOne(id string) (ReadOnlyDoc, bool, error)
+	Query() ReadOnlyQuery
 }
 
 type Collection interface {
-	ReadOnlyCollection
-	InsertOne(item interface{}) error
-	InsertOneWithTTL(item interface{}, expireIn time.Duration) error
-	UpdateOne(item interface{}) error
-	UpdateOneWithTTL(item interface{}, expireIn time.Duration) error
-	UpsertOne(item interface{}) error
-	UpsertOneWithTTL(item interface{}, expireIn time.Duration) error
-	DeleteOne(key string) error
+	GetOne(id string) (Doc, bool, error)
+	Query() Query
+	InsertOne(id string, item interface{}) (Doc, error)
+	UpdateOne(id string, item interface{}) (Doc, error)
+	UpsertOne(id string, item interface{}) (Doc, error)
+	DeleteOne(id string) (Doc, error)
 }
 
 type ReadOnlyDataStore interface {
@@ -30,12 +47,46 @@ type DataStore interface {
 
 type ReadOnlyDataStoreBuilder interface {
 	WithTenantId(tenantId string) ReadOnlyDataStoreBuilder
-	WithPartitionKey(partitionKey string) ReadOnlyDataStoreBuilder
 	Get() ReadOnlyDataStore
 }
 
 type DataStoreBuilder interface {
 	WithTenantId(tenantId string) DataStoreBuilder
-	WithPartitionKey(partitionKey string) DataStoreBuilder
 	Get() DataStore
+}
+
+type PageToken string
+
+type Iter interface {
+	Next(ctx context.Context, out interface{}) bool
+	Err() error
+}
+
+type PagingIter interface {
+	Iter
+	NextToken(ctx context.Context) (PageToken, error)
+}
+
+type ReadOnlyQuery interface {
+	Filter(expr string, args ...interface{}) Query
+	Limit(limit int) Query
+	GetOne(ctx context.Context) (ReadOnlyDoc, bool, error)
+	GetAll(ctx context.Context) ([]ReadOnlyDoc, error)
+
+	// Optional future support
+	// Iter() PagingIter
+	// AllWithNextToken(ctx context.Context, ret interface{}) (PageToken, error)
+	// Count(ctx context.Context) (int, error)
+}
+
+type Query interface {
+	Filter(expr string, args ...interface{}) Query
+	Limit(limit int) Query
+	GetOne(ctx context.Context) (Doc, bool, error)
+	GetAll(ctx context.Context) ([]Doc, error)
+
+	// Optional future support
+	// Iter() PagingIter
+	// AllWithNextToken(ctx context.Context, ret interface{}) (PageToken, error)
+	// Count(ctx context.Context) (int, error)
 }
