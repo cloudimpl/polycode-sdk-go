@@ -43,12 +43,8 @@ type WorkflowContext interface {
 	ReadOnlyDb() ReadOnlyDataStoreBuilder
 	Service(service string) ServiceBuilder
 	Agent(agent string) AgentBuilder
-	ServiceEx(envId string, service string) ServiceBuilder
-	AgentEx(envId string, agent string) AgentBuilder
 	App(appName string) Service
-	AppEx(envId string, appName string) Service
-	Controller(controller string) Controller
-	ControllerEx(envId string, controller string) Controller
+	Controller(envId string, controller string) Controller // ToDo: Move to gateway context
 	Memo(getter func() (any, error)) Response
 	Signal(signalName string) Signal
 	ClientChannel(channelName string) ClientChannel
