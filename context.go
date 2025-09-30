@@ -26,7 +26,7 @@ func getImpl(ctx context.Context) (PolycodeContext, bool) {
 
 type BaseContext interface {
 	context.Context
-	Meta() HandlerContextMeta
+	Meta() TaskMeta
 	AuthContext() AuthContext
 	Logger() Logger
 	FileStore() Folder

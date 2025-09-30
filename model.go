@@ -72,26 +72,34 @@ type LLMInput struct {
 	Text string `json:"text"`
 }
 
-type HandlerContextMeta struct {
-	OrgId     string            `json:"orgId"`
-	EnvId     string            `json:"envId"`
-	AppName   string            `json:"appName"`
-	AppId     string            `json:"appId"`
-	TaskGroup string            `json:"taskGroup"`
-	TaskName  string            `json:"taskName"`
-	TaskId    string            `json:"taskId"`
-	ParentId  string            `json:"parentId"`
-	TraceId   string            `json:"traceId"`
-	InputId   string            `json:"inputId"`
-	Caller    CallerContextMeta `json:"caller"`
-}
-
-type CallerContextMeta struct {
-	OrgId     string `json:"orgId"`
+type Meta struct {
 	EnvId     string `json:"envId"`
 	AppName   string `json:"appName"`
 	AppId     string `json:"appId"`
-	TenantId  string `json:"tenantId"`
+	TaskGroup string `json:"taskGroup"`
+	TaskName  string `json:"taskName"`
+}
+
+type TaskMeta struct {
+	EnvId     string     `json:"envId"`
+	AppName   string     `json:"appName"`
+	AppId     string     `json:"appId"`
+	TaskGroup string     `json:"taskGroup"`
+	TaskName  string     `json:"taskName"`
+	TaskId    string     `json:"taskId"`
+	Input     InputMeta  `json:"input"`
+	Parent    ParentMeta `json:"parent"`
+}
+
+type InputMeta struct {
+	TraceId string `json:"traceId"`
+	InputId string `json:"inputId"`
+}
+
+type ParentMeta struct {
+	EnvId     string `json:"envId"`
+	AppName   string `json:"appName"`
+	AppId     string `json:"appId"`
 	TaskGroup string `json:"taskGroup"`
 	TaskName  string `json:"taskName"`
 	TaskId    string `json:"taskId"`
