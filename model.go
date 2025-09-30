@@ -34,6 +34,14 @@ type AuthContext struct {
 	Claims map[string]interface{} `json:"claims"`
 }
 
+func (a AuthContext) Sub() string {
+	return a.Claims["sub"].(string)
+}
+
+func (a AuthContext) TenantId() string {
+	return a.Claims["sub"].(string)
+}
+
 type ApiRequest struct {
 	Id              string            `json:"id"`
 	Host            string            `json:"host"`
