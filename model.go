@@ -79,13 +79,12 @@ type HandlerContextMeta struct {
 }
 
 type CallerContextMeta struct {
-	OrgId        string `json:"orgId"`
-	EnvId        string `json:"envId"`
-	AppName      string `json:"appName"`
-	AppId        string `json:"appId"`
-	TenantId     string `json:"tenantId"`
-	PartitionKey string `json:"partitionKey"`
-	TaskGroup    string `json:"taskGroup"`
-	TaskName     string `json:"taskName"`
-	TaskId       string `json:"taskId"`
+	OrgId     string `json:"orgId"`
+	EnvId     string `json:"envId"`
+	AppName   string `json:"appName"`
+	AppId     string `json:"appId"`
+	TenantId  string `json:"tenantId"`
+	TaskGroup string `json:"taskGroup"`
+	TaskName  string `json:"taskName"`
+	TaskId    string `json:"taskId"`
 }
