@@ -1,9 +1,14 @@
 package polycode
 
+import "time"
+
 type File interface {
 	Parent() Folder
 	Name() string
 	Path() string
+	Size() int64
+	Created() time.Time
+	Modified() time.Time
 
 	Get() (bool, []byte, error)
 	Download(filePath string) error
