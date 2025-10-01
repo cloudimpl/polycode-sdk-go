@@ -1,9 +1,9 @@
 package api
 
 import (
+	runtime "github.com/cloudimpl/polycode-runtime-go"
 	"github.com/cloudimpl/polycode-sdk-go"
 	"github.com/cloudimpl/polycode-sdk-go/apicontext"
-	"github.com/cloudimpl/polycode-sdk-go/runtime"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -46,7 +46,7 @@ func FromWorkflow[Input any, Output any](f func(polycode.WorkflowContext, Input)
 	}
 }
 
-func ExecService(c *gin.Context, tenantId string, partitionKey string, service string, method string,
+func ExecService(c *gin.Context, service string, method string,
 	options polycode.TaskOptions, input any, outputTransform func(any) (any, error)) {
 	apiCtx, err := apicontext.FromContext(c.Request.Context())
 	if err != nil {
@@ -56,7 +56,7 @@ func ExecService(c *gin.Context, tenantId string, partitionKey string, service s
 		return
 	}
 
-	s := apiCtx.Service(service).WithTenantId(tenantId).WithPartitionKey(partitionKey).Get()
+	s := apiCtx.Service(service).Get()
 	output, err := s.RequestReply(options, method, input).GetAny()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
