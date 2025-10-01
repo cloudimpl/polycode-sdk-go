@@ -55,17 +55,16 @@ type ApiContext interface {
 	WorkflowContext
 }
 
-type RawContext interface {
-	BaseContext
-	GetMeta(group string, typeName string, key string) (map[string]interface{}, error)
-}
+//type RawContext interface {
+//	BaseContext
+//	GetMeta(group string, typeName string, key string) (map[string]interface{}, error)
+//}
 
 type PolycodeContext interface {
 	BaseContext
 	ServiceContext
 	WorkflowContext
 	ApiContext
-	RawContext
 }
 
 func ApiContextFrom(ctx context.Context) (ApiContext, bool) {
@@ -77,11 +76,11 @@ func ApiContextFrom(ctx context.Context) (ApiContext, bool) {
 	return value.(ApiContext), true
 }
 
-func RawContextFrom(ctx context.Context) (ApiContext, bool) {
-	value := ctx.Value("polycode.context")
-	if value == nil {
-		return nil, false
-	}
-
-	return value.(ApiContext), true
-}
+//func RawContextFrom(ctx context.Context) (ApiContext, bool) {
+//	value := ctx.Value("polycode.context")
+//	if value == nil {
+//		return nil, false
+//	}
+//
+//	return value.(ApiContext), true
+//}

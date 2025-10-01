@@ -27,4 +27,5 @@ type Folder interface {
 	Folder(name string) Folder
 	CreateNewFolder(name string) (Folder, error)
 	File(name string) File
+	List(maxFiles int32, offsetToken *string) ([]File, *string, error)
 }
