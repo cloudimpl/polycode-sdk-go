@@ -11,6 +11,8 @@ type ReadOnlyDoc interface {
 	Update(item interface{}) error
 	Delete() error
 	Collection(name string) ReadOnlyCollection
+	Parent() (ReadOnlyDoc, error)
+	Path() (string, error)
 }
 
 type Doc interface {
@@ -19,6 +21,8 @@ type Doc interface {
 	Update(item interface{}) error
 	Delete() error
 	Collection(name string) Collection
+	Parent() (Doc, error)
+	Path() (string, error)
 }
 
 type ReadOnlyCollection interface {
@@ -68,8 +72,8 @@ type PagingIter interface {
 }
 
 type ReadOnlyQuery interface {
-	Filter(expr string, args ...interface{}) Query
-	Limit(limit int) Query
+	Filter(expr string, args ...interface{}) ReadOnlyQuery
+	Limit(limit int) ReadOnlyQuery
 	GetOne(ctx context.Context) (ReadOnlyDoc, bool, error)
 	GetAll(ctx context.Context) ([]ReadOnlyDoc, error)
 
