@@ -36,6 +36,11 @@ type ReadOnlyDoc interface {
 	Path() (string, error)
 }
 
+type ReadOnlyDocList interface {
+	AsList() []ReadOnlyDoc
+	Unmarshal(item interface{}) error
+}
+
 type Doc interface {
 	Unmarshal(item interface{}) error
 	ExpireIn(expireIn time.Duration) error
@@ -44,6 +49,11 @@ type Doc interface {
 	Collection(name string) Collection
 	Parent() (Doc, error)
 	Path() (string, error)
+}
+
+type DocList interface {
+	AsList() []Doc
+	Unmarshal(item interface{}) error
 }
 
 type ReadOnlyCollection interface {
@@ -91,7 +101,7 @@ type ReadOnlyQuery interface {
 	Filter(expr string, args ...interface{}) ReadOnlyQuery
 	Limit(limit int) ReadOnlyQuery
 	GetOne(ctx context.Context) (ReadOnlyDoc, error)
-	GetAll(ctx context.Context) ([]ReadOnlyDoc, error)
+	GetAll(ctx context.Context) (ReadOnlyDocList, error)
 
 	// Optional future support
 	// Iter() PagingIter
@@ -103,7 +113,7 @@ type Query interface {
 	Filter(expr string, args ...interface{}) Query
 	Limit(limit int) Query
 	GetOne(ctx context.Context) (Doc, error)
-	GetAll(ctx context.Context) ([]Doc, error)
+	GetAll(ctx context.Context) (DocList, error)
 
 	// Optional future support
 	// Iter() PagingIter
