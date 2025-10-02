@@ -37,8 +37,8 @@ type ReadOnlyDoc interface {
 }
 
 type ReadOnlyDocList interface {
-	AsList() []ReadOnlyDoc
-	Unmarshal(item interface{}) error
+	Docs() []ReadOnlyDoc
+	AsList(item interface{}) error
 }
 
 type Doc interface {
@@ -52,8 +52,8 @@ type Doc interface {
 }
 
 type DocList interface {
-	AsList() []Doc
-	Unmarshal(item interface{}) error
+	Docs() []Doc
+	AsList(item interface{}) error
 }
 
 type ReadOnlyCollection interface {
