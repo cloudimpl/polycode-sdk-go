@@ -88,12 +88,10 @@ type Doc interface {
 
 type ReadOnlyDocList interface {
 	Docs() []ReadOnlyDoc
-	AsList(item interface{}) error
 }
 
 type DocList interface {
 	Docs() []Doc
-	AsList(item interface{}) error
 }
 
 type ReadOnlyQuery interface {
