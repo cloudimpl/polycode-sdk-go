@@ -38,10 +38,12 @@ type DataStoreBuilder interface {
 }
 
 type ReadOnlyDataStore interface {
+	DocByPath(path string) (ReadOnlyDoc, error)
 	Collection(name string) ReadOnlyCollection
 }
 
 type DataStore interface {
+	DocByPath(path string) (Doc, error)
 	Collection(name string) Collection
 }
 
@@ -49,7 +51,6 @@ type ReadOnlyCollection interface {
 	GetOne(id string) (ReadOnlyDoc, error)
 	Query() ReadOnlyQuery
 
-	Name() string
 	Path() string
 }
 
@@ -58,47 +59,31 @@ type Collection interface {
 	Query() Query
 	InsertOne(id string, item interface{}, opts ...WriteOption) (Doc, error)
 
-	Name() string
 	Path() string
 }
 
 type ReadOnlyDoc interface {
-	Unmarshal(item interface{}) error
 	ChildCollection(name string) ReadOnlyCollection
 
-	Parent() ReadOnlyDoc
-	Collection() ReadOnlyCollection
-
-	Id() string
 	Path() string
+	Unmarshal(item interface{}) error
 }
 
 type Doc interface {
-	Unmarshal(item interface{}) error
 	ExpireIn(expireIn time.Duration) error
 	Update(item interface{}, opts ...WriteOption) error
 	Delete(opts ...WriteOption) error
 	ChildCollection(name string) Collection
 
-	Parent() Doc
-	Collection() Collection
-	Id() string
 	Path() string
-}
-
-type ReadOnlyDocList interface {
-	Docs() []ReadOnlyDoc
-}
-
-type DocList interface {
-	Docs() []Doc
+	Unmarshal(item interface{}) error
 }
 
 type ReadOnlyQuery interface {
 	Filter(expr string, args ...interface{}) ReadOnlyQuery
 	Limit(limit int) ReadOnlyQuery
 	GetOne(ctx context.Context) (ReadOnlyDoc, error)
-	GetAll(ctx context.Context) (ReadOnlyDocList, error)
+	GetAll(ctx context.Context) ([]ReadOnlyDoc, error)
 
 	// Optional future support
 	// Iter() PagingIter
@@ -110,7 +95,7 @@ type Query interface {
 	Filter(expr string, args ...interface{}) Query
 	Limit(limit int) Query
 	GetOne(ctx context.Context) (Doc, error)
-	GetAll(ctx context.Context) (DocList, error)
+	GetAll(ctx context.Context) ([]Doc, error)
 
 	// Optional future support
 	// Iter() PagingIter
