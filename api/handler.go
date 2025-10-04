@@ -1,7 +1,6 @@
 package api
 
 import (
-	runtime "github.com/cloudimpl/polycode-runtime-go"
 	"github.com/cloudimpl/polycode-sdk-go"
 	"github.com/cloudimpl/polycode-sdk-go/apicontext"
 	"github.com/gin-gonic/gin"
@@ -26,13 +25,13 @@ func FromWorkflow[Input any, Output any](f func(polycode.WorkflowContext, Input)
 			return
 		}
 
-		err = runtime.GetValidator().Validate(input)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
-			return
-		}
+		//err = runtime.GetValidator().Validate(input)
+		//if err != nil {
+		//	c.JSON(http.StatusBadRequest, gin.H{
+		//		"error": err.Error(),
+		//	})
+		//	return
+		//}
 
 		output, err := f(apiCtx, input)
 		if err != nil {

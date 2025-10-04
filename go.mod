@@ -3,7 +3,6 @@ module github.com/cloudimpl/polycode-sdk-go
 go 1.24.5
 
 require (
-	github.com/cloudimpl/polycode-runtime-go v0.26.0
 	github.com/gin-gonic/gin v1.10.1
 )
 
