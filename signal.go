@@ -1,7 +1,7 @@
 package polycode
 
 type Signal interface {
-	Await() Response
+	Await() (Response, error)
 	EmitValue(taskId string, data any) error
 	EmitError(taskId string, err Error) error
 }

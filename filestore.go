@@ -9,8 +9,6 @@ type FileMetaData struct {
 }
 
 type ReadOnlyFile interface {
-	Parent() ReadOnlyFolder
-	Name() string
 	Path() string
 	Metadata() FileMetaData
 
@@ -20,8 +18,6 @@ type ReadOnlyFile interface {
 }
 
 type File interface {
-	Parent() Folder
-	Name() string
 	Path() string
 	Metadata() FileMetaData
 
@@ -40,22 +36,18 @@ type File interface {
 }
 
 type ReadOnlyFolder interface {
-	Parent() ReadOnlyFolder
-	Name() string
 	Path() string
 
-	Folder(name string) ReadOnlyFolder
-	File(name string) ReadOnlyFile
+	Folder(name string) (ReadOnlyFolder, error)
+	File(name string) (ReadOnlyFile, error)
 	List(maxFiles int32, offsetToken *string) ([]ReadOnlyFile, *string, error)
 }
 
 type Folder interface {
-	Parent() Folder
-	Name() string
 	Path() string
 
-	Folder(name string) Folder
+	Folder(name string) (Folder, error)
 	CreateNewFolder(name string) (Folder, error)
-	File(name string) File
+	File(name string) (File, error)
 	List(maxFiles int32, offsetToken *string) ([]File, *string, error)
 }

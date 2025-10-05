@@ -1,7 +1,7 @@
 package polycode
 
 type Service interface {
-	RequestReply(options TaskOptions, method string, input any) Response
+	RequestReply(options TaskOptions, method string, input any) (Response, error)
 	Send(options TaskOptions, method string, input any) error
 }
 

@@ -1,7 +1,7 @@
 package polycode
 
 type Agent interface {
-	Call(options TaskOptions, input AgentInput) Response
+	Call(options TaskOptions, input AgentInput) (Response, error)
 }
 
 type AgentBuilder interface {
