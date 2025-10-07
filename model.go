@@ -93,7 +93,6 @@ type TaskMeta struct {
 
 type InputMeta struct {
 	TraceId string `json:"traceId"`
-	InputId string `json:"inputId"`
 }
 
 type ParentMeta struct {
