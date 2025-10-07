@@ -103,4 +103,5 @@ type ParentMeta struct {
 	TaskGroup string `json:"taskGroup"`
 	TaskName  string `json:"taskName"`
 	TaskId    string `json:"taskId"`
+	Step      int64  `json:"step"`
 }
