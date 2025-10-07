@@ -6,15 +6,15 @@ import (
 )
 
 type WriteConfig struct {
-	TTL    int  `json:"ttl"`
-	Unsafe bool `json:"unsafe"`
-	Upsert bool `json:"upsert"`
+	TTL    int64 `json:"ttl"`
+	Unsafe bool  `json:"unsafe"`
+	Upsert bool  `json:"upsert"`
 }
 
 type WriteOption func(*WriteConfig)
 
 func WithExpireIn(expireIn time.Duration) WriteOption {
-	expireInSeconds := int(expireIn.Seconds())
+	expireInSeconds := int64(expireIn.Seconds())
 	return func(cfg *WriteConfig) { cfg.TTL = expireInSeconds }
 }
 
