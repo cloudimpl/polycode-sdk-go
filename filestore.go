@@ -8,6 +8,16 @@ type FileMetaData struct {
 	Size     int64     `json:"size"`
 }
 
+type ReadOnlyFileStoreBuilder interface {
+	WithTenantId(tenantId string) ReadOnlyFileStoreBuilder
+	Get() ReadOnlyFolder
+}
+
+type FileStoreBuilder interface {
+	WithTenantId(tenantId string) FileStoreBuilder
+	Get() Folder
+}
+
 type ReadOnlyFile interface {
 	Path() string
 	Metadata() FileMetaData

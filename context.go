@@ -27,20 +27,19 @@ func getImpl(ctx context.Context) (PolycodeContext, bool) {
 type BaseContext interface {
 	context.Context
 	Meta() TaskMeta
-	AuthContext() AuthContext
 	Logger() Logger
-	FileStore() Folder
-	TempFileStore() Folder
 }
 
 type ServiceContext interface {
 	BaseContext
 	Db() DataStoreBuilder
+	FileStore() FileStoreBuilder
 }
 
 type WorkflowContext interface {
 	BaseContext
 	ReadOnlyDb() ReadOnlyDataStoreBuilder
+	ReadOnlyFileStore() ReadOnlyFileStoreBuilder
 	Service(service string) ServiceBuilder
 	Agent(agent string) AgentBuilder
 	Memo(getter func() (any, error)) Response
