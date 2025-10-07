@@ -3,6 +3,7 @@ package polycode
 import "time"
 
 type FileMetaData struct {
+	Name     string    `json:"name"`
 	Created  time.Time `json:"created"`
 	Modified time.Time `json:"modified"`
 	Size     int64     `json:"size"`
