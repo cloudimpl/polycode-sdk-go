@@ -82,8 +82,6 @@ type Meta struct {
 
 type TaskMeta struct {
 	EnvId     string     `json:"envId"`
-	AppName   string     `json:"appName"`
-	AppId     string     `json:"appId"`
 	TaskGroup string     `json:"taskGroup"`
 	TaskName  string     `json:"taskName"`
 	TaskId    string     `json:"taskId"`
@@ -97,8 +95,6 @@ type InputMeta struct {
 
 type ParentMeta struct {
 	EnvId     string `json:"envId"`
-	AppName   string `json:"appName"`
-	AppId     string `json:"appId"`
 	TaskGroup string `json:"taskGroup"`
 	TaskName  string `json:"taskName"`
 	TaskId    string `json:"taskId"`
