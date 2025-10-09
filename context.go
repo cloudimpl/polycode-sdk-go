@@ -42,6 +42,7 @@ type WorkflowContext interface {
 	ReadOnlyFileStore() ReadOnlyFileStoreBuilder
 	Service(service string) ServiceBuilder
 	Agent(agent string) AgentBuilder
+	App(appName string) ServiceBuilder
 	Memo(getter func() (any, error)) Response
 	Signal(signalName string) Signal
 	ClientChannel(channelName string) ClientChannel
