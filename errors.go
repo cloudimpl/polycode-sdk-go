@@ -8,7 +8,8 @@ import (
 	"strings"
 )
 
-var ErrNotFound = DefineError("polycode.sdk", 0, "not found")
+var errNotFound = DefineError("polycode.sdk", 0, "not found")
+var ErrNotFound = &errNotFound
 var ErrAlreadyExist = DefineError("polycode.sdk", 1, "already exist")
 var ErrConflict = DefineError("polycode.sdk", 2, "conflict")
 var ErrContextNotFound = DefineError("polycode.sdk", 3, "context not found")
