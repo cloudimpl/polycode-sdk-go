@@ -37,13 +37,13 @@ type DataStoreBuilder interface {
 }
 
 type ReadOnlyDataStore interface {
-	DocByPath(path string) (ReadOnlyDoc, error)
-	Collection(name string) ReadOnlyCollection
+	ServiceCollection(name string) ReadOnlyCollection
+	AppCollection(name string) ReadOnlyCollection
 }
 
 type DataStore interface {
-	DocByPath(path string) (Doc, error)
-	Collection(name string) Collection
+	ServiceCollection(name string) Collection
+	AppCollection(name string) Collection
 }
 
 type ReadOnlyCollection interface {
