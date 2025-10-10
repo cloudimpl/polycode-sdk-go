@@ -59,8 +59,11 @@ type WorkflowContext interface {
 }
 
 type ApiContext interface {
-	WorkflowContext
+	BaseContext
+	Service(service string) ServiceBuilder
 	Controller(controller string) ControllerBuilder
+	Agent(agent string) AgentBuilder
+	App(appName string) ServiceBuilder
 }
 
 //type RawContext interface {
