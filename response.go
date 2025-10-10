@@ -4,6 +4,6 @@ type Response interface {
 	HasResult() bool
 	IsError() bool
 	Get(ret any) error
-	GetAny() any
+	GetAny() (any, error)
 	Error() Error
 }

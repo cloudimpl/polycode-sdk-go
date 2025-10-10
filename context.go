@@ -9,7 +9,7 @@ type ctxKey struct{}
 
 // WithContext attaches your *ContextImpl to a parent context.
 // Call this once at the edge (HTTP middleware, gRPC interceptor, Lambda handler, etc.)
-func WithContext(parent context.Context, impl BaseContext) context.Context {
+func WithContext(parent context.Context, impl PolycodeContext) context.Context {
 	return context.WithValue(parent, ctxKey{}, impl)
 }
 
@@ -22,6 +22,15 @@ func getImpl(ctx context.Context) (PolycodeContext, bool) {
 	}
 	impl, ok := v.(PolycodeContext)
 	return impl, ok
+}
+
+func ApiContextFrom(ctx context.Context) (ApiContext, bool) {
+	value := ctx.Value(ctxKey{})
+	if value == nil {
+		return nil, false
+	}
+
+	return value.(ApiContext), true
 }
 
 type BaseContext interface {
@@ -65,21 +74,3 @@ type PolycodeContext interface {
 	WorkflowContext
 	ApiContext
 }
-
-func ApiContextFrom(ctx context.Context) (ApiContext, bool) {
-	value := ctx.Value("polycode.context")
-	if value == nil {
-		return nil, false
-	}
-
-	return value.(ApiContext), true
-}
-
-//func RawContextFrom(ctx context.Context) (ApiContext, bool) {
-//	value := ctx.Value("polycode.context")
-//	if value == nil {
-//		return nil, false
-//	}
-//
-//	return value.(ApiContext), true
-//}
