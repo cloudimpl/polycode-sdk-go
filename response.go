@@ -1,9 +1,11 @@
 package polycode
 
 type Response interface {
-	HasResult() bool
-	IsError() bool
 	Get(ret any) error
 	GetAny() (any, error)
+
+	HasResult() bool
+	IsError() bool
+	Output() any
 	Error() Error
 }
